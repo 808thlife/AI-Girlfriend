@@ -3,3 +3,6 @@ env
 migrations/
 db.sqlite3
 /static/
+.env
+TODO.txt
+__pycache__
