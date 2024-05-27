@@ -1,7 +1,7 @@
 from django.db import models
 
 class Chat(models.Model):
-    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
+    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE, related_name = "chats")
     timestamp = models.DateField(auto_now_add=True)
 
     def __str__(self):

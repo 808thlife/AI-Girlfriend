@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'ai_api',
+    'accounts',
+    'chats',
+    'rest_framework'
 
 ]
 
@@ -124,5 +127,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#user model setup
+AUTH_USER_MODEL = "accounts.User"
+
 
 GOOGLE_AI_API_KEY = "MYAPIKEY"
