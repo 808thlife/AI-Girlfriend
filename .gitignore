@@ -6,3 +6,4 @@ db.sqlite3
 .env
 TODO.txt
 __pycache__
+.vscode
