@@ -3,6 +3,8 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 from channels.layers import get_channel_layer
 
+from ai_api.utils import chat_sessions
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
 
@@ -30,8 +32,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'message': message
         }))
 
-    async def greeting(self, user):
+    async def greeting(self, chat):
         pass
     
-    async def response(self,user):
+    async def response(self, chat):
         pass

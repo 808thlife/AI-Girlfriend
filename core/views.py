@@ -11,11 +11,6 @@ def index(request):
     print(chat.hash)
     return HttpResponseRedirect(reverse("core:chat", kwargs = {"hash":chat.hash}))
     
-
-
-
-
-
 def chat_view(request, hash):
     try:
         chat = Chat.objects.get(hash = hash)

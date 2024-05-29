@@ -108,6 +108,14 @@ USE_I18N = True
 USE_TZ = True
 
 
+
+#websockets layers
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -126,10 +134,3 @@ GOOGLE_AI_API_KEY = config("API_KEY")
 
 #ASGI
 ASGI_APPLICATION = "ai_girlfriend.asgi.application"
-
-#websockets layers
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
-}
