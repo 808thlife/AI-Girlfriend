@@ -9,6 +9,7 @@ genai.configure(
 )
 
 model = genai.GenerativeModel("gemini-pro")
+
 chat = model.start_chat(history=[
     {
         "role":"user",

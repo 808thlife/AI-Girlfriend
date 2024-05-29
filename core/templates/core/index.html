@@ -111,6 +111,12 @@
   <script>
     const chat_hash = JSON.parse(document.getElementById("json-chathash").textContent)
     const user = JSON.parse((document.getElementById("json-username").textContent))
+
+    const chatSocket = new WebSocket(`ws:/localhost:8000/ws/chat/${chat_hash}`)
+
+    chatSocket.onopen = function() {
+      console.log('WebSocket connection established.');
+    };
   </script>
 </body>
 

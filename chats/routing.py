@@ -1,7 +1,7 @@
-from django.urls import re_path
+from django.urls import path
 
 from . import consumers
 
 ws_urlpatterns = [
-    re_path(r"ws/(?P<chat_hash>\w+)/", consumers.ChatConsumer.as_asgi())
+    path("ws/chat/<str:hash>", consumers.ChatConsumer.as_asgi())
 ]
