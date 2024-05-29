@@ -20,6 +20,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,3 +123,6 @@ AUTH_USER_MODEL = "accounts.User"
 
 
 GOOGLE_AI_API_KEY = config("API_KEY")
+
+#ASGI
+ASGI_APPLICATION = "ai_girlfriend.asgi.application"
