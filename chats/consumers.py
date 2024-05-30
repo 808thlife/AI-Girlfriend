@@ -4,7 +4,7 @@ from channels.layers import get_channel_layer
 
 from asgiref.sync import sync_to_async
 
-from ai_api.utils import chat_sessions, initialize_ai_chat
+from ai_api.utils import chat_sessions, initialize_ai_chat, send_message_to_ai
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -32,18 +32,34 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
+        print(text_data_json)
         message = text_data_json['message']
-        self.send(text_data=json.dumps({
-            'message': message
+        chat_hash = text_data_json['chat_hash']
+
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                "type":"chat_message",
+                "message":message,
+                "chat_hash":chat_hash
+            }
+        )
+       
+    async def chat_message(self, event):
+        #chat = chat_sessions.get(event['chat_hash'])
+        message = event['message']
+        chat_hash = event['chat_hash']
+
+        response = await self.send_ai_message(chat_hash=chat_hash, message=message)
+        print(response)
+
+        await self.send(text_data = json.dumps({
+            "chat_hash":chat_hash,
+            "message":response.text
         }))
-
-    #by chat i meant chat_hash.
-
-    def create_message(self, chat):
-        pass
-
-    async def greeting(self, chat):
-        pass
     
-    async def response(self, chat):
-        pass
+   # @sync_to_async
+    async def send_ai_message(self, chat_hash, message):
+        response = await sync_to_async(send_message_to_ai)(chat_hash, message)
+        return response  # Directly return the string response
+

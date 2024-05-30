@@ -118,16 +118,26 @@
       console.log('WebSocket connection established.');
     };
 
+
+    
+    chatSocket.onmessage = (e)=>{
+      const message = JSON.parse(e.data)
+      console.log(message)
+    }
+
     const sendButton = document.querySelector("#send-message")
 
     sendButton.addEventListener("click", (e)=>{
-      let message = {
-        "message": document.getElementById("#message-text").value
-    }
+      let message = document.getElementById("message-text").value
+
+      let json_message = {
+        "type":"chat_message",
+        "chat_hash": chat_hash,
+        "message":message
+      }
+
+      chatSocket.send(JSON.stringify(json_message))
     })
-
-    
-
 
   </script>
 </body>

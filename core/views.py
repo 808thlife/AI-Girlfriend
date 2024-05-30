@@ -8,7 +8,6 @@ from django.urls import reverse
 def index(request):
     user = request.user
     chat, created = Chat.objects.get_or_create(user = user)
-    print(chat.hash)
     return HttpResponseRedirect(reverse("core:chat", kwargs = {"hash":chat.hash}))
     
 def chat_view(request, hash):
