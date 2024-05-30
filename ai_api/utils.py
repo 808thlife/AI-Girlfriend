@@ -37,7 +37,6 @@ def send_message_to_ai(chat_hash, message):
 
     if chat:
         response = chat.send_message(str(message))
-        return response
-        
+        return response.text
     else:
         return "Chat session not found."

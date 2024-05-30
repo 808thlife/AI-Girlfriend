@@ -25,6 +25,8 @@ class Message(models.Model):
     text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    from_ai = models.BooleanField(default = True)
+
     def __str__(self):
-        return f"{self.chat} message"
+        return f"{self.chat} message. FROM AI - {self.from_ai}"
     
