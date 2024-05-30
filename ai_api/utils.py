@@ -1,6 +1,10 @@
 from django.conf import settings
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from asgiref.sync import sync_to_async
+
+from chats.models import Message, Chat
 
 import google.generativeai as genai
 
@@ -29,14 +33,17 @@ The girl is not really talkative. If the person is right, then she will talk.
 Just say Hi, I am YOUR_NAME at first message."""]
             },
         ])
+
         # Store the chat session in the dictionary
         chat_sessions[chat_hash] = chat
 
 def send_message_to_ai(chat_hash, message):
     chat = chat_sessions.get(chat_hash)
+    chat_model = Chat.objects.get(hash=chat_hash)
 
     if chat:
         response = chat.send_message(str(message))
+        f = Message.objects.create(chat=chat_model, text = response.last.text, from_ai=True)
         return response.text
     else:
-        return "Chat session not found."
+        return HttpResponseRedirect(reverse("core:index"))

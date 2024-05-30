@@ -21,7 +21,6 @@ class Chat(models.Model):
 
 class Message(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name = "messages")
-    user = models.ForeignKey("accounts.User",on_delete=models.CASCADE)
     text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
