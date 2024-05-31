@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from chats.models import Chat
+from chats.models import Chat, Message
 
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -16,6 +16,8 @@ def chat_view(request, hash):
     except Chat.DoesNotExist:
         return HttpResponseRedirect(reverse("core:index"))
     
-    context = {"chat":chat}
+    messsages = Message.objects.filter(chat = chat)
+
+    context = {"chat":chat, "messages":messsages}
 
     return render(request, "core/index.html", context)

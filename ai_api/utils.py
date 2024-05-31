@@ -43,8 +43,8 @@ def send_message_to_ai(chat_hash, message):
 
     if chat:
         response = chat.send_message(str(message))
-        print(response)
-        f = Message.objects.create(chat=chat_model, text = response.last.text, from_ai=True)
+        message_object = Message.objects.create(chat=chat_model, text = message, from_ai=False)
+        f = Message.objects.create(chat=chat_model, text = response.text, from_ai=True)
         return response.text
     else:
         return HttpResponseRedirect(reverse("core:index"))

@@ -54,13 +54,8 @@
       <div class="content  p-0 pt-2 col-lg-9 col-md-12">
         <div class="chat-content-area">
 
-          <!-- START USER CHAT -->
-          <div class="row user-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="{%static 'core/images/user-icon.png' %}" />
-            </div>
-            <div class="chat-txt">who are you?</div>
-          </div>
+          {% for message in messages %}
+          {% if message.from_ai %}
 
           <!-- START GPT CHAT -->
           <div class="row gpt-chat-box">
@@ -68,13 +63,27 @@
               <img class="chatgpt-icon" src="{%static 'core/images/chatgpt-icon.png' %}" />
             </div>
             <div class="chat-txt">
-              I am ChatGPT, a large language model developed by OpenAI. I am
-              an artificial intelligence designed to process and generate
-              human-like text based on the input provided to me. I am here to
-              assist you with any questions or tasks you may have to the best
-              of my abilities!
+             {{message.text}}
             </div>
           </div>
+          
+          {% else %}
+          <!-- START USER CHAT -->
+          <div class="row user-chat-box">
+            <div class="chat-icon">
+              <img class="chatgpt-icon" src="{%static 'core/images/user-icon.png' %}" />
+            </div>
+            <div class="chat-txt">{{message.text}}</div>
+          </div>
+
+          {% endif %}
+          
+
+          
+          {% endfor %}
+          
+
+          
           <!-- START USER CHAT -->
         </div>
 

@@ -6,6 +6,8 @@ from asgiref.sync import sync_to_async
 
 from ai_api.utils import chat_sessions, initialize_ai_chat, send_message_to_ai
 
+from chats.models import Message, Chat
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
 
@@ -55,7 +57,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         await self.send(text_data = json.dumps({
             "chat_hash":chat_hash,
-            "message":response.text
+            "message":response
         }))
     
    # @sync_to_async
@@ -63,3 +65,4 @@ class ChatConsumer(AsyncWebsocketConsumer):
         response = await sync_to_async(send_message_to_ai)(chat_hash, message)
         return response  # Directly return the string response
 
+   
