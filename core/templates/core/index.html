@@ -123,6 +123,9 @@
 
     const chatSocket = new WebSocket(`ws:/localhost:8000/ws/chat/${chat_hash}`)
 
+    const contentWindow = document.querySelector(".chat-content-area")
+
+
     chatSocket.onopen = function() {
       console.log('WebSocket connection established.');
     };
@@ -131,6 +134,17 @@
     
     chatSocket.onmessage = (e)=>{
       const message = JSON.parse(e.data)
+      let newMessage = document.createElement("div")
+      newMessage.innerHTML = `
+      <div class="row user-chat-box">
+        <div class="chat-icon">
+          <img class="chatgpt-icon" src="{%static 'core/images/chatgpt-icon.png' %}" />
+        </div>
+        <div class="chat-txt">${message["message"]}</div>
+      </div>
+      `
+
+      contentWindow.appendChild(newMessage)
       console.log(message)
     }
 
@@ -146,6 +160,22 @@
       }
 
       chatSocket.send(JSON.stringify(json_message))
+
+
+      let newMessage = document.createElement("div")
+      newMessage.innerHTML = `
+      <div class="row user-chat-box">
+        <div class="chat-icon">
+          <img class="chatgpt-icon" src="{%static 'core/images/user-icon.png' %}" />
+        </div>
+        <div class="chat-txt">${message}</div>
+      </div>
+      `
+
+      document.getElementById("message-text").value = ""
+
+      contentWindow.appendChild(newMessage)
+
     })
 
   </script>
