@@ -134,3 +134,7 @@ GOOGLE_AI_API_KEY = config("API_KEY")
 
 #ASGI
 ASGI_APPLICATION = "ai_girlfriend.asgi.application"
+
+
+#AUTHENTICATION
+LOGIN_URL = "/login/"

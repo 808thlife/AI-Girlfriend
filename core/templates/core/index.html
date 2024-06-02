@@ -24,9 +24,12 @@
 
         <!-- START NEW CHAT BUTTON -->
         <div class="row p-2">
-          <div class="chat-btn d-flex align-items-center">
-            <span class="d-block">+ New Chat</span>
-          </div>
+    
+          <a href="{% url "core:delete_chat" %}" class="row p-2 text-decoration-none text-white">
+            <div class="chat-btn d-flex align-items-center">
+                <span class="d-block">+ New Chat</span>
+            </div>
+        </a>
         </div>
 
         
@@ -40,7 +43,7 @@
             <ul class="list-unstyled">
               <!-- START LOG OUT -->
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="{% url "accounts:logout_view" %}">
                   <i class="fas fa-sign-out-alt"></i> Log Out
                 </a>
               </li>
