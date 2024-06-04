@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+    command: sh -c "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/app
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis://redis:6379
+
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379:6379"

@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -110,10 +111,22 @@ USE_TZ = True
 
 
 #websockets layers
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#     }
+# }
+
+REDIS_HOST = os.environ.get('REDIS_HOST', 'redis://127.0.0.1:6379')
+
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            #"hosts": [(REDIST_HOST, 6379)],
+            "hosts": [("redis", 6379)],
+        },
+    },
 }
 
 # Static files (CSS, JavaScript, Images)
