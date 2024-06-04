@@ -12,7 +12,7 @@ services:
     depends_on:
       - redis
     environment:
-      - REDIS_HOST=redis://redis:6379
+      - REDIS_HOST=redis
 
   redis:
     image: redis:alpine

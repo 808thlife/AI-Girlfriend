@@ -117,14 +117,14 @@ USE_TZ = True
 #     }
 # }
 
-REDIS_HOST = os.environ.get('REDIS_HOST', 'redis://127.0.0.1:6379')
+REDIS_HOST = os.environ.get('REDIS_HOST', 'redis')
 
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             #"hosts": [(REDIST_HOST, 6379)],
-            "hosts": [("redis", 6379)],
+            "hosts": [(REDIS_HOST, 6379)],
         },
     },
 }
