@@ -16,3 +16,6 @@ Welcome to the AI Girlfriend application! This application simulates conversatio
 - JavaScript
 - HTML/CSS
 - Bootstrap (optional for styling)
+
+# NOTE
+ YOU HAVE TO DEFINE YOUR OWN API_KEY IN .env FILE
